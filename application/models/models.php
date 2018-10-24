@@ -17,7 +17,7 @@ class Models extends CI_Model{
         		'id' => $id
         	)
         );
-        $result = $query->result_array();
+        $result = $query->result();
 
         return $result;
 	}

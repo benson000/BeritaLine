@@ -27,14 +27,26 @@ class Input extends CI_Controller{
 			50 //quantity of char taken
 		);
 
-		$path_foto = $this->input->post('path_foto');
-		$date_created = $this->input->post('date_created');
+		/*$path_foto = 'C:\xampp\htdocs\codeigniter\berita\uploaded_files\ ';
+		$config['upload_path'] = $path_foto;
+		$config['allowed_types'] = 'jpg|png|gif|doc|docx|pdf';
+		$config['max_size'] = 1000;
+		$config['max_width'] = 1024;
+		$config['max_height'] = 1000;
+
+		$this->load->library('upload', $config);
+
+		$file = $this->upload->data();
+		$img_name = $file['file_name'];
+		*/
+
+		$date_created = date('Y-m-d G:i:s');
 
 		$data = array(
 			'judul' => $judul,
 			'berita_singkat' => $berita_singkat,
 			'berita_lengkap' => $berita_lengkap,
-			'path_foto' => $path_foto,
+			'path_foto' => 'C:\xampp\htdocs\codeigniter\berita\uploaded_files\ ',
 			'date_created' => $date_created
 		);
 

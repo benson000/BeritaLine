@@ -9,15 +9,22 @@ class Edit extends CI_Controller{
 	
 	function index($id){
 		//fetch to input box
-		$table = 'berita';
+		$table = 'posting';
 		$result = $this->models->select_data($table, $id);
+
+		$judul = '';
+		$berita = '';
+
+		foreach ($result as $res) {
+			$judul = $res->judul;
+			$berita = $res->berita_lengkap;
+		}
 
 		//to be transferred
 		$data = array(
-			'id' => $result[0]['id'],
-			'judul' => $result[0]['judul'],
-			'berita_lengkap' => $result[0]['berita_lengkap'],
-			'path_foto' => $result[0]['path_foto'],
+			'id' => $id,
+			'judul' => $judul,
+			'berita_lengkap' => $berita,
 		);
 
 		$this->load->view('edit_berita', $data);
@@ -52,14 +59,24 @@ class Edit extends CI_Controller{
 		//execute input to database
 		$this->models->updateData($where, $data, $table);
 
-		$this->load->view('view_berita/'.$id);
+		redirect('dashboard/index');
 	}
 
 	function delete($id){
 		$table = 'posting';
 
+		$result = $this->models->select_data($table, $id);
+
+		$judul = '';
+		$berita = '';
+
+		foreach ($result as $res) {
+			$judul = $res->judul;
+			$berita = $res->berita_lengkap;
+		}
+
 		$this->models->delete_row($table, $id);
-		$this->load->view('index_berita');
+		redirect('dashboard/index');
 	}
 }
 ?>
